@@ -38,6 +38,17 @@ for(i=0; i<taskCount; i++)
     else 
         textB.id = "text" + i;
     textB.value= aTT;
+    if(i < 10 && localStorage.getItem("chec0" + i) == "c")
+    {
+        textB.className = "cutTask";
+        checkB.checked = true;
+    }
+    else if(i > 9 && localStorage.getItem("chec" + i) == "c")
+    {
+        textB.className = "cutTask";
+        checkB.checked = true;
+    }
+
     newDiv.appendChild(textB);
 
     // The new delete button
@@ -54,10 +65,6 @@ function showAdd(){
     document.getElementById("addMenu").classList.toggle("show");
 }
 
-function cutTaskFn(event){
-    event.target.nextElementSibling.classList.toggle("cutTask");
-}
-
 //To add new list item by creating them ONE BY ONE
 function addFn(){
     // Take the text from the add task textBox
@@ -66,7 +73,6 @@ function addFn(){
         localStorage.setItem("task0" + taskCount,aTT.value);
     else 
         localStorage.setItem("task" + taskCount,aTT.value);
-
 
     // The container for the new elements
     var newDiv= document.createElement("div");
@@ -77,6 +83,10 @@ function addFn(){
     var checkB= document.createElement("input");
     checkB.type="checkbox";
     checkB.onclick=cutTaskFn;
+    if(taskCount< 10)
+        localStorage.setItem("chec0" + taskCount,"u");
+    else 
+        localStorage.setItem("chec" + taskCount,"u");
     newDiv.appendChild(checkB);
 
     // The new textbox
@@ -107,10 +117,26 @@ function textEnter(event) {
         addFn();
 }
 
+function cutTaskFn(event){
+    var nextTextBox = event.target.nextElementSibling;
+    var checkTaskNum = nextTextBox.id[4] + nextTextBox.id[5];
+    if(event.target.checked == true)
+    {
+        nextTextBox.className = "cutTask";
+        localStorage.setItem("chec" + checkTaskNum, "c");
+    }
+    else
+    {
+        nextTextBox.classList.remove("cutTask");
+        localStorage.setItem("chec" + checkTaskNum, "u");
+    }
+}
+
 function delTask(event) {
     event.target.parentNode.remove();
     var delTaskNum = event.target.previousElementSibling.id[4] + event.target.previousElementSibling.id[5];
     localStorage.removeItem("task" + delTaskNum);
+    localStorage.removeItem("chec" + delTaskNum);
 }
 
 function delAllTask() {
