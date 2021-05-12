@@ -5,12 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To Do List</title>
   <link rel="stylesheet" href="ToDoStyles.css"/>
-  <script src="ToDoJs.js"></script>
 </head>
 <body>
 <div id="Main" class="Main">
   <div style="background-color: #2C567A;">
-    <h1>TO DO LIST v2.4.3</h1>
+    <h1>TO DO LIST v3.1.3</h1>
+  </div>
+
+  <div id="msg">
+    <p>This list is stored locally on your browser. So all the tasks remain on your browser until you delete them.</p>
+    <p>Use this list for all your tasks such as assignments, grocery list etc.</p>
   </div>
 
   <!--Add more tasks with dropdown button-->
@@ -24,30 +28,12 @@
     </div>
   </div>
 
-  <!--Predefined Tasks-->
-  <div id="listContainer">
-    <!-- <div class="list">
-      <input type="checkbox" onclick="cutTaskFn(event)">
-      <input type="text" value="Complete Chemistry file">
-      <img src="delBtn.png" height="35px" width="35px" onclick="delTask(event)"></img>
-    </div>
-    <div class="list">
-      <input type="checkbox" onclick="cutTaskFn(event)">
-      <input type="text" value="Start studying (One day)">
-      <img src="delBtn.png" height="35px" width="35px" onclick="delTask(event)"></img>
-    </div>
-    <div class="list">
-      <input type="checkbox" onclick="cutTaskFn(event)">
-      <input type="text" value="Complete this 'Todo List' project">
-      <img src="delBtn.png" height="35px" width="35px" onclick="delTask(event)"></img>
-    </div>
-    <div class="list">
-      <input type="checkbox" onclick="cutTaskFn(event)">
-      <input type="text" value="Gather notes for cheating">
-      <img src="delBtn.png" height="35px" width="35px" onclick="delTask(event)"></img>
-    </div> -->
-  </div>
-  <p id="exp"></p>
+  <!--Container for Tasks-->
+  <div id="listContainer"></div>
+
+  <button id="delAllBtn" onclick="delAllTask()">Delete all Tasks</button>
+  <p id="exp" class="list"></p>
 </div>
+<script src="ToDoJs.js"></script>
 </body>
 </html>
