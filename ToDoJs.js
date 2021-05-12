@@ -1,4 +1,5 @@
 var taskCount, i;
+var listContainer = document.getElementById("listContainer");
 
 // Check if there are no previous tasks
 if(localStorage.getItem("taskCount") == null)
@@ -10,15 +11,18 @@ taskCount = Number(localStorage.getItem("taskCount"));
 // For loading all previous tasks
 for(i=0; i<taskCount; i++)
 {
-    if(localStorage.getItem("task" + i) != null)
+    if(localStorage.getItem("task0" + i) != null || (i>9 && localStorage.getItem("task" + i) != null))
     {
     // Take the text from the add task textBox
-    var aTT=  localStorage.getItem("task" + i);
-    
+    if(i< 10)
+        var aTT=  localStorage.getItem("task0" + i);
+    else 
+        var aTT=  localStorage.getItem("task" + i);
+   
     // The container for the new elements
     var newDiv= document.createElement("div");
     newDiv.className="list";
-    document.getElementById("listContainer").appendChild(newDiv);
+    listContainer.appendChild(newDiv);
 
     // The new checkbox
     var checkB= document.createElement("input");
@@ -29,7 +33,10 @@ for(i=0; i<taskCount; i++)
     // The new textbox
     var textB= document.createElement("input");
     textB.type="text";
-    textB.id = "text" + i;
+    if(i< 10)
+        textB.id = "text0" + i;
+    else 
+        textB.id = "text" + i;
     textB.value= aTT;
     newDiv.appendChild(textB);
 
@@ -55,14 +62,16 @@ function cutTaskFn(event){
 function addFn(){
     // Take the text from the add task textBox
     var aTT=  document.getElementById("addTaskText");
-    localStorage.setItem("task" + taskCount,aTT.value);
-    // Empty the add text textBox
-    aTT.value="";
+    if(taskCount< 10)
+        localStorage.setItem("task0" + taskCount,aTT.value);
+    else 
+        localStorage.setItem("task" + taskCount,aTT.value);
+
 
     // The container for the new elements
     var newDiv= document.createElement("div");
     newDiv.className="list";
-    document.getElementById("listContainer").appendChild(newDiv);
+    listContainer.appendChild(newDiv);
 
     // The new checkbox
     var checkB= document.createElement("input");
@@ -73,8 +82,11 @@ function addFn(){
     // The new textbox
     var textB= document.createElement("input");
     textB.type="text";
-    textB.id = "text" + taskCount;
-    textB.value= localStorage.getItem("task" + taskCount);
+    if(taskCount< 10)
+        textB.id = "text0" + taskCount;
+    else 
+        textB.id = "text" + taskCount;
+    textB.value= aTT.value;
     newDiv.appendChild(textB);
 
     // The new delete button
@@ -86,6 +98,8 @@ function addFn(){
     taskCount++;
     localStorage.setItem("taskCount", taskCount);
     document.getElementById("delAllBtn").style.display = "block";
+    // Empty the add text textBox
+    aTT.value="";
 }
 
 function textEnter(event) {
@@ -95,7 +109,7 @@ function textEnter(event) {
 
 function delTask(event) {
     event.target.parentNode.remove();
-    var delTaskNum = event.target.previousElementSibling.id[4];
+    var delTaskNum = event.target.previousElementSibling.id[4] + event.target.previousElementSibling.id[5];
     localStorage.removeItem("task" + delTaskNum);
 }
 
