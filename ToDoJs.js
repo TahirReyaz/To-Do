@@ -88,6 +88,11 @@ function addFn(){
     document.getElementById("delAllBtn").style.display = "block";
 }
 
+function textEnter(event) {
+    if(event.key === 'Enter' || event.keyCode === 13)
+        addFn();
+}
+
 function delTask(event) {
     event.target.parentNode.remove();
     var delTaskNum = event.target.previousElementSibling.id[4];

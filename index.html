@@ -22,7 +22,7 @@
     <button onclick="showAdd()" type="button" class="dropBtn" >+ Add more tasks</button>
     <div id="addMenu" class="dropContent">
     <nobr>
-      <input type="text" id="addTaskText">
+      <input type="text" id="addTaskText" onkeypress="textEnter(event)">
       <img src="addBtn.png" height="35px" width="35px" onclick="addFn()"></img>
     </nobr>
     </div>
