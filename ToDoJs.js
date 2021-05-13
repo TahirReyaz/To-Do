@@ -48,7 +48,7 @@ for(i=0; i<taskCount; i++)
         textB.className = "cutTask";
         checkB.checked = true;
     }
-
+    textB.onkeypress= textEdit;
     newDiv.appendChild(textB);
 
     // The new delete button
@@ -97,6 +97,7 @@ function addFn(){
     else 
         textB.id = "text" + taskCount;
     textB.value= aTT.value;
+    textB.onkeypress= textEdit;
     newDiv.appendChild(textB);
 
     // The new delete button
@@ -115,6 +116,14 @@ function addFn(){
 function textEnter(event) {
     if(event.key === 'Enter' || event.keyCode === 13)
         addFn();
+}
+
+function textEdit(event) {
+    if(event.key === 'Enter' || event.keyCode === 13)
+    {
+        var textId = event.target.id[4] + event.target.id[5];
+        localStorage.setItem("task" + textId, event.target.value);
+    }
 }
 
 function cutTaskFn(event){

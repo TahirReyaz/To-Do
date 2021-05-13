@@ -11,7 +11,8 @@ h1{
     color: white;
 }
 .Main{
-    background-image: url('toDoLightBg.jpg');
+    background-image: url('toDoLightBg.webp');
+    background-size: var(--bodyWidth);
     width: var(--bodyWidth);
     font-family: Arial, Helvetica, sans-serif;
     margin: auto;
